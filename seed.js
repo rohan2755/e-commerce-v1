@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 const Product = require('./models/product');
-mongoose.connect('mongodb://127.0.0.1:27017/shopping-app') // To set up database
-    .then(()=> console.log('DB connected'))
-    .catch((err)=> console.log(err))
+// mongoose.connect('mongodb://127.0.0.1:27017/shopping-app') // To set up database
+//     .then(()=> console.log('DB connected'))
+//     .catch((err)=> console.log(err))
 
 const products = [
     {
@@ -46,12 +46,13 @@ const products = [
 
 // If you don't want to make a function then we just have to copy mongoose.connect method here and use Product.insertMany(products)
 
+async function seedDb() {
 
-
-async function seedDB(){
     await Product.deleteMany({});
+
     await Product.insertMany(products);
-    console.log('products seeded')
+
+    console.log('DB seeded');
 }
 
-seedDB();
+module.exports = seedDb;
